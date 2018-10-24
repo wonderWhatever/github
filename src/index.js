@@ -22,11 +22,16 @@ Vue.use(vueResource);
 Vue.http.options.root = 'http://www.liulongbin.top:3005';
 
 
+
+//全局配置
+Vue.http.options.emulateJSON = true;
+
+
 //时间插件
 import Moment from 'moment'
 //配置全局的过滤器
 //参数1 格式化的数据  参数二 数据格式
-Vue.filter("dataClear",function (data,pattern='YYYY-MM-DD HH:MM:SS') {
+Vue.filter("dataClear",function (data,pattern='YYYY-MM-DD HH:mm:ss') {
    return Moment(data).format(pattern);
 });
 

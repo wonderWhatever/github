@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="header">
+        <div class="newsinfo_header">
             <h3>{{newsinfo.title}}</h3>
             <p><span>发表时间:{{newsinfo.add_time|dataClear}}</span><span>点击量:{{newsinfo.click}}</span></p>
         </div>
@@ -9,12 +9,13 @@
 
         </div>
         <div class="pinglun">
-
+            <comment :id="id"></comment>
         </div>
     </div>
 </template>
 
 <script>
+    import Comment from "../submitcomponent/comment.vue"
     export default {
         name: "newsinfo",
         data(){
@@ -25,7 +26,6 @@
         },
         methods:{
             getNewsinfo(){
-                console.log(this.id);
                 this.$http.get('api/getnew/'+this.id).then(result=>{
                     if (result.body.status === 0) {
                         console.log(result.body.message[0]);
@@ -36,12 +36,15 @@
         },
         created(){
             this.getNewsinfo();
+        },
+        components:{
+            comment:Comment
         }
     }
 </script>
 
-<style scoped lang="scss">
-    .header{
+<style  lang="scss">
+    .newsinfo_header{
         h3{
             font-size: 16px;
             text-align: center;
@@ -59,5 +62,8 @@
         img{
             width: 100%;
         }
+    }
+    .pinglun{
+        padding-bottom: 50px;
     }
 </style>

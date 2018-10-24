@@ -8,6 +8,7 @@ import  Member from "./components/tapbar/member.vue"
 import  Search from "./components/tapbar/search.vue"
 import  NewList from "./components/news/newsList.vue"
 import  Newsinfo from "./components/news/newsinfo.vue"
+import  Photo from "./components/photos/photoList.vue"
 
 
 
@@ -19,7 +20,8 @@ let router=new VueRouter({
         {path:'/member',component:Member},
         {path:'/search',component:Search},
         {path:'/home/newsList',component:NewList},
-        {path:'/home/newsinfo/:id',component:Newsinfo}
+        {path:'/home/newsinfo/:id',component:Newsinfo},
+        {path:'/home/photoList',component:Photo},
     ],
     linkActiveClass:"mui-active",
 
