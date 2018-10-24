@@ -9,7 +9,7 @@
                     <!--这里放置真实显示的DOM内容-->
 
                     <a :class="['mui-control-item',item.id===0?'mui-active':'']" href="javascript:"
-                       v-for="item in navList" :key="item.id">
+                       v-for="item in navList" :key="item.id" @click="getPhotoList(item.id)">
                         {{item.title}}
                     </a>
 
@@ -18,20 +18,15 @@
         </div>
 
         <ul class="photos">
-            <li class="photo">
-                <img alt="" src="http://ofv795nmp.bkt.clouddn.com//upload/201504/18/thumb_201504181230434303.jpg">
+            <router-link :to="'/home/photoInfo/'+item.id" class="photo" v-for="item in photoList" :key="item.id" tag="li">
+
+                <img alt="" v-lazy='item.img_url'>
                 <div class="Img_text">
-                    <h4>十年生死两茫茫</h4>
-                    <span>不思量，自难忘，千里孤坟，无处话凄凉</span>
+                    <h4>{{item.title}}</h4>
+                    <span>{{item.zhaiyao}}</span>
                 </div>
-            </li>
-            <li class="photo">
-                <img alt="" src="http://ofv795nmp.bkt.clouddn.com//upload/201504/18/thumb_201504181237019134.jpg">
-                <div class="Img_text">
-                    <h4>夜来幽梦忽还乡</h4>
-                    <span>小轩窗，正梳妆，相顾无言，惟有泪千行</span>
-                </div>
-            </li>
+
+            </router-link>
         </ul>
     </div>
 </template>
@@ -44,7 +39,8 @@
         name: "photoList",
         data() {
             return {
-                navList: []
+                navList: [],
+                photoList:[]
             }
         },
         mounted() {
@@ -57,18 +53,26 @@
         },
         created() {
             this.getNav();
+            this.getPhotoList(0);
         },
         methods: {
             getNav() {
                 this.$http.get("api/getimgcategory").then(res => {
                     if (res.body.status === 0) {
-
                         this.navList = res.body.message;
                         this.navList.unshift({title: "全部", id: 0});
-                        console.log(this.navList);
                     }
                 })
-            }
+            },
+            getPhotoList(id){
+                this.$http.get('api/getimages/'+id).then(res=>{
+                    if (res.body.status === 0) {
+                        console.log(id);
+                        this.photoList = res.body.message;
+                        console.log(this.photoList);
+                    }
+                })
+            },
         }
     }
 
@@ -84,13 +88,20 @@
 
     .photos{
         list-style: none;
+        padding: 10px;
         width: 100%;
         text-align: center;
+        img[lazy=loading] {
+            width: 40px;
+            height: 300px;
+            margin: auto;
+        }
         .photo{
             margin-bottom: 10px;
             width: 100%;
             position: relative;
             background-color: #cccccc;
+            box-shadow: 0 0 9px #999;
             .Img_text{
                 position: absolute;
                 left: 0;
@@ -114,4 +125,6 @@
             }
         }
     }
+
+
 </style>

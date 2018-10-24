@@ -63,7 +63,7 @@
                             add_time:Date().now,
                             user_name:"匿名用户",
                             content:this.message.trim(),
-                        }
+                        };
                         this.comments.unshift(cmt);
                         this.message='';
                     }

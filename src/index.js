@@ -21,6 +21,10 @@ Vue.use(vueResource);
 //全局配置请求的根路径
 Vue.http.options.root = 'http://www.liulongbin.top:3005';
 
+//导入vue-preview
+import VuePreview from 'vue-preview'
+Vue.use(VuePreview);
+
 
 
 //全局配置

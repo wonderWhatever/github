@@ -9,6 +9,9 @@ import  Search from "./components/tapbar/search.vue"
 import  NewList from "./components/news/newsList.vue"
 import  Newsinfo from "./components/news/newsinfo.vue"
 import  Photo from "./components/photos/photoList.vue"
+import  PhotoInfo from "./components/photos/photoInfo.vue"
+import  Good from "./components/goods/goodsList.vue"
+import  GoodsInfo from "./components/goods/goodsInfo.vue"
 
 
 
@@ -22,6 +25,9 @@ let router=new VueRouter({
         {path:'/home/newsList',component:NewList},
         {path:'/home/newsinfo/:id',component:Newsinfo},
         {path:'/home/photoList',component:Photo},
+        {path:'/home/photoInfo/:id',component:PhotoInfo},
+        {path:'/home/goodsList',component:Good},
+        {path:'/home/goodsInfo/:id',component:GoodsInfo},
     ],
     linkActiveClass:"mui-active",
 
