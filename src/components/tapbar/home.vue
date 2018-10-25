@@ -1,16 +1,15 @@
 <template>
     <div>
-        <div class="home-swipe">
 
-            <mt-swipe :auto="4000">
+
+           <!-- <mt-swipe :auto="4000">
 
                 <mt-swipe-item v-for="(item,i) in bannerList" :key="i">
                     <img :src='item.img' alt="">
                 </mt-swipe-item>
 
-            </mt-swipe>
-
-        </div>
+            </mt-swipe>-->
+        <swipe :list="bannerList" :isFull="true"></swipe>
         <div class="body">
             <ul class="mui-table-view mui-grid-view mui-grid-9">
                 <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
@@ -56,6 +55,7 @@
 
 <script>
     import {Toast} from 'mint-ui';
+    import swipe from  '../submitcomponent/swipe.vue'
 
     export default {
         name: "home",
@@ -77,18 +77,21 @@
         },
         created() {
             this.getBanner();
+        },
+        components:{
+            swipe
         }
     }
 </script>
 
 <style scoped lang="scss">
-    .home-swipe {
+/*    .home-swipe {
         height: 200px;
         img {
             width: 100%;
             height: 100%;
         }
-    }
+    }*/
 
     .body ul {
         background-color: white;
