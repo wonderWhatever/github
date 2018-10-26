@@ -7,7 +7,11 @@
         </transition>
 
         <!--头部-->
-        <mt-header fixed title="随便买"></mt-header>
+        <mt-header title="Vue" fixed>
+            <span @click="goback" slot="left" v-show="flag">
+                <mt-button icon="back">返回</mt-button>
+            </span>
+        </mt-header>
 
 
 
@@ -31,7 +35,7 @@
                 <span class="mui-tab-label">会员</span>
             </router-link>
             <router-link class="mui-tab-item1" to="/shopcar">
-                <span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge">9</span></span>
+                <span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge">{{$store.getters.getallNum}}</span></span>
                 <span class="mui-tab-label">购物车</span>
             </router-link>
             <router-link class="mui-tab-item1" to="/search">
@@ -45,7 +49,30 @@
 
 <script>
     export default {
-        name: "App"
+        name: "App",
+        methods:{
+            goback(){
+                //点击后退
+                this.$router.go(-1);
+            }
+        },
+        data(){
+            return{
+                flag:false
+            }
+        },
+        created(){
+
+        },
+        watch:{
+            '$route.path':function (newVal) {
+                if(newVal==='/home'){
+                    this.flag=false;
+                }else {
+                    this.flag=true;
+                }
+            }
+        }
     }
 </script>
 

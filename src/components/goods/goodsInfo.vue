@@ -99,6 +99,15 @@
             },
             showball(){
                 this.flag=!this.flag;
+                //点击 要 id 数量 单价 选中状态 最大存到一个对象里面去
+                let obj={
+                    id:this.id,
+                    count:this.shuliang,
+                    price:this.goodsList.sell_price,
+                    selected:true,
+                    max:this.goodsList.stock_quantity
+                };
+                this.$store.commit("addCar",obj);
             },
             beforeEnter(el){
                 el.style.transform='translate(0,0)';
